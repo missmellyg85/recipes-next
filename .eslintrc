@@ -41,9 +41,7 @@
 					// (and likewise below in import resolver alias mappings)
 					["^@/pages"],
 					["^@/components"],
-					["^@/contexts"],
 					["^@/lib"],
-					["^@/styles"],
 					["^\\."] // relative imports
 				]
 			}
@@ -56,11 +54,8 @@
 			"alias": {
 				"map": [
 					["@/components", "./src/components/"],
-					["@/contexts", "./src/contexts/"],
 					["@/lib", "./src/lib/"],
-					["@/pages", "./src/pages/"],
-					["@/styles", "./src/styles/"],
-					["@/test", "./src/test/"]
+					["@/pages", "./src/pages/"]
 				]
 			}
 		}

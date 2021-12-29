@@ -1,8 +1,10 @@
 import { Params } from 'next/dist/server/router'
 
-import Header from '../../components/Header'
-import { Recipe } from '../../ts/types'
-import recipesList from '../api/recipesList.json'
+import { Recipe } from '@/ts/types'
+
+import Header from '@/components/Header'
+
+import { recipesList } from '@/lib/consts/data'
 
 export default function RecipePage({ id, title }: Recipe) {
 	return (

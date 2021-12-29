@@ -2,7 +2,7 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import recipesList from './api/recipesList.json'
+import { recipesList } from '@/lib/consts/data'
 
 export default function HomePage() {
 	return (
