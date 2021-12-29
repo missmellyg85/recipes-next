@@ -1,15 +1,16 @@
-import { render } from "@testing-library/react";
-import RecipePage from "../../pages/recipes/[id]";
-import { Recipe } from "../../ts/types";
+import { render } from '@testing-library/react'
 
-describe("Recipe Page", () => {
-  it("renders the recipe", () => {
-    const testRecipe: Recipe = { id: 1234, title: "Some Test" };
-    const { getByText } = render(<RecipePage {...testRecipe} />);
+import RecipePage from '../../pages/recipes/[id]'
+import { Recipe } from '../../ts/types'
 
-    expect(
-      getByText(`Recipe: ${testRecipe.id}`, { exact: false })
-    ).toBeInTheDocument();
-    expect(getByText(testRecipe.title, { exact: false })).toBeInTheDocument();
-  });
-});
+describe('Recipe Page', () => {
+	it('renders the recipe', () => {
+		const testRecipe: Recipe = { id: 1234, title: 'Some Test' }
+		const { getByText } = render(<RecipePage {...testRecipe} />)
+
+		expect(
+			getByText(`Recipe: ${testRecipe.id}`, { exact: false })
+		).toBeInTheDocument()
+		expect(getByText(testRecipe.title, { exact: false })).toBeInTheDocument()
+	})
+})

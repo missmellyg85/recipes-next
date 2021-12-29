@@ -1,0 +1,68 @@
+{
+	"root": true,
+	"plugins": ["simple-import-sort", "import", "sort-keys-fix"],
+	"extends": [
+		"eslint:recommended",
+		"next",
+		"next/core-web-vitals",
+		"plugin:import/recommended",
+		"prettier"
+	],
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true,
+		"node": true
+	},
+	"rules": {
+		"import/first": "error",
+		"import/no-duplicates": "error",
+		"import/newline-after-import": "error",
+		"no-console": ["error", { "allow": ["error", "warn"] }],
+		"react/prop-types": "error",
+		"react/jsx-sort-props": [
+			"error",
+			{
+				"ignoreCase": true
+			}
+		],
+		"simple-import-sort/imports": [
+			"error",
+			{
+				"groups": [
+					["^\\u0000"], // side effect imports
+					["^react"], // react imports
+					["^next"], // next imports
+					["^@?\\w"], // other packages
+					["^"], // unmatched imports
+					["^@mui"], // material-ui imports
+					// NOTE that the following need to be configured to match
+					// desired order of any alias mappings added to jsconfig.json
+					// (and likewise below in import resolver alias mappings)
+					["^@/pages"],
+					["^@/components"],
+					["^@/contexts"],
+					["^@/lib"],
+					["^@/styles"],
+					["^\\."] // relative imports
+				]
+			}
+		],
+		"sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false }],
+		"simple-import-sort/exports": "error"
+	},
+	"settings": {
+		"import/resolver": {
+			"alias": {
+				"map": [
+					["@/components", "./src/components/"],
+					["@/contexts", "./src/contexts/"],
+					["@/lib", "./src/lib/"],
+					["@/pages", "./src/pages/"],
+					["@/styles", "./src/styles/"],
+					["@/test", "./src/test/"]
+				]
+			}
+		}
+	}
+}
