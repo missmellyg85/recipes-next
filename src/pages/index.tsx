@@ -1,22 +1,22 @@
 import React from 'react'
 
-import Link from 'next/link'
+import { Box, Container, Link, List, ListItem } from '@mui/material'
 
 import { recipesList } from '@/lib/consts/data'
 
 export default function HomePage() {
 	return (
-		<>
-			<h1>Welcome to Next.js!</h1>
-			<ul>
+		<Container sx={{ paddingTop: 4 }}>
+			<Box sx={{ typography: 'h3' }}>Recipes Index</Box>
+			<List>
 				{recipesList.map(({ id, title }) => (
-					<li key={`recipe-${id}`}>
-						<Link href={`/recipes/${id}`}>
-							<a>{title}</a>
+					<ListItem key={`recipe-${id}`}>
+						<Link href={`/recipes/${id}`} underline="none">
+							{title}
 						</Link>
-					</li>
+					</ListItem>
 				))}
-			</ul>
-		</>
+			</List>
+		</Container>
 	)
 }

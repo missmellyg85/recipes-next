@@ -2,6 +2,8 @@ import { Params } from 'next/dist/server/router'
 
 import { Recipe } from '@/ts/types'
 
+import { Box, Container } from '@mui/material'
+
 import Header from '@/components/Header'
 
 import { recipesList } from '@/lib/consts/data'
@@ -10,9 +12,15 @@ export default function RecipePage({ id, title }: Recipe) {
 	return (
 		<>
 			<Header />
-			<p>
-				Recipe: {id}, {title}
-			</p>
+			<Container id={`recipe-${id}`} sx={{ marginTop: 4 }}>
+				<Box
+					sx={{
+						typography: 'h3',
+					}}
+				>
+					{title}
+				</Box>
+			</Container>
 		</>
 	)
 }

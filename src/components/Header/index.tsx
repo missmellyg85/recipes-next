@@ -1,13 +1,16 @@
-import Link from 'next/link'
+import { AppBar, Link, Toolbar } from '@mui/material'
 
 export default function Header() {
 	return (
-		<ul>
-			<li>
-				<Link href="/">
-					<a>Home</a>
-				</Link>
-			</li>
-		</ul>
+		<header>
+			<AppBar>
+				<Toolbar>
+					<Link color="secondary" href="/" underline="none">
+						Home
+					</Link>
+				</Toolbar>
+			</AppBar>
+			<Toolbar />
+		</header>
 	)
 }
