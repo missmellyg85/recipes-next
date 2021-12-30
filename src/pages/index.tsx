@@ -1,15 +1,21 @@
 import React from 'react'
 
+import { Prisma } from '@prisma/client'
+
 import { Box, Container, Link, List, ListItem } from '@mui/material'
 
-import { recipesList } from '@/lib/consts/data'
+import prisma from '@/lib/db/prisma'
 
-export default function HomePage() {
+type HomePageProps = {
+	recipes?: Prisma.RecipeGetPayload<Prisma.RecipeArgs>[]
+}
+
+export default function HomePage({ recipes }: HomePageProps) {
 	return (
 		<Container sx={{ paddingTop: 4 }}>
 			<Box sx={{ typography: 'h3' }}>Recipes Index</Box>
 			<List>
-				{recipesList.map(({ id, title }) => (
+				{recipes?.map(({ id, title }) => (
 					<ListItem key={`recipe-${id}`}>
 						<Link href={`/recipes/${id}`} underline="none">
 							{title}
@@ -19,4 +25,14 @@ export default function HomePage() {
 			</List>
 		</Container>
 	)
+}
+
+export async function getStaticProps() {
+	const recipes = await prisma.recipe.findMany()
+
+	return {
+		props: {
+			recipes,
+		},
+	}
 }

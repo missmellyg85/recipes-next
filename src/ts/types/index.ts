@@ -1,4 +1,1 @@
-export type Recipe = {
-	id: number
-	title: string
-}
+export * from './prismaExtension'

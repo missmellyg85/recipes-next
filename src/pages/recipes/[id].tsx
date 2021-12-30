@@ -1,24 +1,43 @@
 import { Params } from 'next/dist/server/router'
 
-import { Recipe } from '@/ts/types'
+import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
-import { Box, Container } from '@mui/material'
+import { Box, Container, List, ListItem } from '@mui/material'
 
 import Header from '@/components/Header'
 
-import { recipesList } from '@/lib/consts/data'
+import prisma from '@/lib/db/prisma'
 
-export default function RecipePage({ id, title }: Recipe) {
+export default function RecipePage({
+	id,
+	title,
+	ingredients,
+	instructions,
+}: RecipeWithIngredientsAndInstructions) {
 	return (
 		<>
 			<Header />
 			<Container id={`recipe-${id}`} sx={{ marginTop: 4 }}>
-				<Box
-					sx={{
-						typography: 'h3',
-					}}
-				>
-					{title}
+				<Box typography="h3">{title}</Box>
+				<Box>
+					<Box typography="h4">Ingredients</Box>
+
+					<List>
+						{ingredients?.map(({ description, id }) => (
+							<ListItem key={id}>{description}</ListItem>
+						))}
+					</List>
+				</Box>
+				<Box>
+					<Box typography="h4">Instructions</Box>
+					<List>
+						{instructions?.map(({ description, id, order }, idx) => (
+							<ListItem key={id}>
+								{`${order || idx + 1}. `}
+								{description}
+							</ListItem>
+						))}
+					</List>
 				</Box>
 			</Container>
 		</>
@@ -26,18 +45,26 @@ export default function RecipePage({ id, title }: Recipe) {
 }
 
 export async function getStaticProps({ params }: Params) {
-	const data = recipesList.find(({ id }) => id.toString() === params.id)
+	const recipe = await prisma.recipe.findFirst({
+		include: {
+			ingredients: true,
+			instructions: true,
+		},
+		where: { id: parseInt(params.id) },
+	})
 
 	return {
 		props: {
-			...data,
+			...recipe,
 		},
 	}
 }
 
 export async function getStaticPaths() {
+	const recipes = await prisma.recipe.findMany()
+
 	return {
 		fallback: false,
-		paths: recipesList.map(({ id }) => ({ params: { id: id.toString() } })),
+		paths: recipes.map(({ id }) => ({ params: { id: id.toString() } })),
 	}
 }
