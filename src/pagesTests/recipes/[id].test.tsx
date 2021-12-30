@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import RecipePage from '../../pages/recipes/[id]'
+import RecipePage from '../../pages/recipe/[id]'
 import { Recipe } from '../../ts/types'
 
 describe('Recipe Page', () => {

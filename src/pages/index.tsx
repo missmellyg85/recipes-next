@@ -17,12 +17,17 @@ export default function HomePage({ recipes }: HomePageProps) {
 			<List>
 				{recipes?.map(({ id, title }) => (
 					<ListItem key={`recipe-${id}`}>
-						<Link href={`/recipes/${id}`} underline="none">
+						<Link href={`/recipe/${id}`} underline="none">
 							{title}
 						</Link>
 					</ListItem>
 				))}
 			</List>
+			<Box>
+				<Link href="/recipe/add" underline="none">
+					Add New
+				</Link>
+			</Box>
 		</Container>
 	)
 }
