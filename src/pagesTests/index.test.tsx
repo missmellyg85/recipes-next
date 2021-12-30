@@ -6,6 +6,6 @@ describe('HomePage', () => {
 	it('renders', () => {
 		const { getByText } = render(<HomePage />)
 
-		expect(getByText('Welcome to Next.js!')).toBeInTheDocument()
+		expect(getByText('Recipes Index')).toBeInTheDocument()
 	})
 })
