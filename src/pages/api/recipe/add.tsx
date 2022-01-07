@@ -9,12 +9,18 @@ export default async function addRecipeHandler(
 	res: NextApiResponse<Prisma.RecipeGetPayload<Prisma.RecipeArgs>>
 ) {
 	try {
-		const { title } = req.body
+		const { title, ingredients, instructions } = req.body
 
-		const response = await prisma.recipe.create({ data: { title } })
+		const response = await prisma.recipe.create({
+			data: {
+				ingredients: { createMany: { data: [...ingredients] } },
+				instructions: { createMany: { data: [...instructions] } },
+				title,
+			},
+		})
 		res.status(200).json(response)
 	} catch (e) {
-		console.warn('An error occurred adding recipe')
+		console.warn('An error occurred adding recipe', e)
 		res.status(500)
 	}
 }
