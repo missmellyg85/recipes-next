@@ -2,14 +2,7 @@ import { useState } from 'react'
 
 import axios from 'axios'
 
-import {
-	Box,
-	Button,
-	Container,
-	List,
-	ListItem,
-	TextField,
-} from '@mui/material'
+import { Box, Button, Container, TextField } from '@mui/material'
 
 import Header from '@/components/Header'
 
@@ -77,7 +70,7 @@ export default function AddRecipe() {
 	return (
 		<>
 			<Header />
-			<Container sx={{ paddingTop: 4 }}>
+			<Container data-testid="add-recipe-container" sx={{ paddingTop: 4 }}>
 				{message}
 				<Box component="form">
 					<Box sx={{ marginBottom: 2 }}>
@@ -95,6 +88,7 @@ export default function AddRecipe() {
 							const ingrNum = idx + 1
 							return (
 								<TextField
+									data-testid={`new-ingredient-${ingrNum}`}
 									fullWidth
 									id={`new-ingredient-${ingrNum}`}
 									key={`new-ingredient-${ingrNum}`}
@@ -109,7 +103,9 @@ export default function AddRecipe() {
 						})}
 					</Box>
 					<Box sx={{ marginBottom: 2, textAlign: 'right' }}>
-						<Button onClick={addIngredient}>Add Another</Button>
+						<Button data-testid="add-ingredient" onClick={addIngredient}>
+							Add Another
+						</Button>
 					</Box>
 					<Box sx={{ marginBottom: 1 }}>Instructions:</Box>
 					<Box>
@@ -117,6 +113,7 @@ export default function AddRecipe() {
 							const instNum = idx + 1
 							return (
 								<TextField
+									data-testid={`new-instruction-${instNum}`}
 									fullWidth
 									id={`new-instruction-${instNum}`}
 									key={`new-instruction-${instNum}`}
@@ -131,7 +128,9 @@ export default function AddRecipe() {
 						})}
 					</Box>
 					<Box sx={{ marginBottom: 2, textAlign: 'right' }}>
-						<Button onClick={addInstruction}>Add Another</Button>
+						<Button data-testid="add-instruction" onClick={addInstruction}>
+							Add Another
+						</Button>
 					</Box>
 					<Box>
 						<Button onClick={addRecipe} variant="contained">

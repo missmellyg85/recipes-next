@@ -8,6 +8,13 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
+	collectCoverageFrom: [
+		'src/**/*.{js,jsx,ts,tsx}',
+		'!src/lib/consts/**.ts',
+		'!src/lib/db/**',
+		'!src/styles/**',
+		'!src/ts/**',
+	],
 	moduleDirectories: ['node_modules', '<rootDir>/'],
 	moduleNameMapper: {
 		// NOTE that the following need to be configured to match
