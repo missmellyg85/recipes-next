@@ -1,8 +1,8 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
-import RecipePage from '../../pages/recipe/[id]'
+import RecipePage from '../../../pages/recipe/[id]'
 
 describe('Recipe Page', () => {
 	it('renders the recipe', () => {
@@ -14,8 +14,10 @@ describe('Recipe Page', () => {
 			title: 'Some Test',
 			updatedAt: new Date(),
 		}
-		const { getByText } = render(<RecipePage {...testRecipe} />)
+		render(<RecipePage {...testRecipe} />)
 
-		expect(getByText(testRecipe.title, { exact: false })).toBeInTheDocument()
+		expect(
+			screen.getByText(testRecipe.title, { exact: false })
+		).toBeInTheDocument()
 	})
 })

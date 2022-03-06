@@ -1,8 +1,10 @@
 import React from 'react'
 
+import Link from 'next/link'
+
 import { Prisma } from '@prisma/client'
 
-import { Box, Container, Link, List, ListItem } from '@mui/material'
+import { Box, Container, List, ListItem } from '@mui/material'
 
 import prisma from '@/lib/db/prisma'
 
@@ -17,16 +19,12 @@ export default function HomePage({ recipes }: HomePageProps) {
 			<List>
 				{recipes?.map(({ id, title }) => (
 					<ListItem key={`recipe-${id}`}>
-						<Link href={`/recipe/${id}`} underline="none">
-							{title}
-						</Link>
+						<Link href={`/recipe/${id}`}>{title}</Link>
 					</ListItem>
 				))}
 			</List>
 			<Box>
-				<Link href="/recipe/add" underline="none">
-					Add New
-				</Link>
+				<Link href="/recipe/add">Add New</Link>
 			</Box>
 		</Container>
 	)

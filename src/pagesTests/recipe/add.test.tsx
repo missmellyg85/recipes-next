@@ -1,4 +1,10 @@
-import { fireEvent, render, waitFor, within } from '@testing-library/react'
+import {
+	fireEvent,
+	render,
+	screen,
+	waitFor,
+	within,
+} from '@testing-library/react'
 import axios from 'axios'
 
 import AddRecipe from '@/pages/recipe/add'
@@ -32,9 +38,9 @@ describe('AddRecipe Page', () => {
 				description: `Test Instruction ${idx}`,
 			}))
 
-		const { getByLabelText, getByTestId, getByText } = render(<AddRecipe />)
+		render(<AddRecipe />)
 
-		fireEvent.change(getByLabelText('New Recipe Title'), {
+		fireEvent.change(screen.getByLabelText('New Recipe Title'), {
 			target: { value: title },
 		})
 
@@ -46,7 +52,7 @@ describe('AddRecipe Page', () => {
 		) {
 			if (idx >= settingVals.length) return
 
-			const settingBlock = getByTestId(`new-${setting}-${idx + 1}`)
+			const settingBlock = screen.getByTestId(`new-${setting}-${idx + 1}`)
 			const input = within(settingBlock).getByLabelText(
 				setting[0].toUpperCase() + setting.slice(1)
 			)
@@ -57,19 +63,21 @@ describe('AddRecipe Page', () => {
 			fireEvent.click(nextButton)
 
 			await waitFor(() => {
-				expect(getByTestId(`new-${setting}-${idx + 2}`)).toBeInTheDocument()
+				expect(
+					screen.getByTestId(`new-${setting}-${idx + 2}`)
+				).toBeInTheDocument()
 			})
 
 			await addSetting(idx + 1, setting, settingVals, nextButton)
 		}
 
-		const addIngredientButton = getByTestId('add-ingredient')
+		const addIngredientButton = screen.getByTestId('add-ingredient')
 		await addSetting(0, 'ingredient', ingredients, addIngredientButton)
 
-		const addInstructionButton = getByTestId('add-instruction')
+		const addInstructionButton = screen.getByTestId('add-instruction')
 		await addSetting(0, 'instruction', instructions, addInstructionButton)
 
-		fireEvent.click(getByText('Save Recipe'))
+		fireEvent.click(screen.getByText('Save Recipe'))
 
 		await waitFor(() => expect(axiosSpy).toBeCalledTimes(1))
 		expect(axiosSpy).toBeCalledWith(
@@ -86,9 +94,9 @@ describe('AddRecipe Page', () => {
 		const title = 'Test Recipe Title'
 		axiosSpy.mockResolvedValueOnce({ data: { title } })
 
-		const { getByLabelText, getByTestId, getByText } = render(<AddRecipe />)
+		render(<AddRecipe />)
 
-		fireEvent.change(getByLabelText('New Recipe Title'), {
+		fireEvent.change(screen.getByLabelText('New Recipe Title'), {
 			target: { value: title },
 		})
 
@@ -98,7 +106,7 @@ describe('AddRecipe Page', () => {
 			settingVal: string,
 			nextButton: HTMLElement
 		) {
-			const settingBlock = getByTestId(`new-${setting}-${idx + 1}`)
+			const settingBlock = screen.getByTestId(`new-${setting}-${idx + 1}`)
 			const input = within(settingBlock).getByLabelText(
 				setting[0].toUpperCase() + setting.slice(1)
 			)
@@ -109,19 +117,21 @@ describe('AddRecipe Page', () => {
 			fireEvent.click(nextButton)
 
 			await waitFor(() => {
-				expect(getByTestId(`new-${setting}-${idx + 2}`)).toBeInTheDocument()
+				expect(
+					screen.getByTestId(`new-${setting}-${idx + 2}`)
+				).toBeInTheDocument()
 			})
 		}
 
-		const addIngredientButton = getByTestId('add-ingredient')
+		const addIngredientButton = screen.getByTestId('add-ingredient')
 		await addSetting(0, 'ingredient', 'ingredient-1', addIngredientButton)
 		await addSetting(1, 'ingredient', '', addIngredientButton)
 
-		const addInstructionButton = getByTestId('add-instruction')
+		const addInstructionButton = screen.getByTestId('add-instruction')
 		await addSetting(0, 'instruction', '', addInstructionButton)
 		await addSetting(1, 'instruction', 'instruction-2', addInstructionButton)
 
-		fireEvent.click(getByText('Save Recipe'))
+		fireEvent.click(screen.getByText('Save Recipe'))
 
 		await waitFor(() => expect(axiosSpy).toBeCalledTimes(1))
 		expect(axiosSpy).toBeCalledWith(
