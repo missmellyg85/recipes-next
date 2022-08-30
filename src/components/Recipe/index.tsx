@@ -2,21 +2,29 @@ import Link from 'next/link'
 
 import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
-import { Box, List, ListItem } from '@mui/material'
+import { Box, List, ListItem, Typography } from '@mui/material'
+
+type RecipeProps = {
+	recipe: RecipeWithIngredientsAndInstructions
+	isFeatureView?: boolean
+}
 
 export function Recipe({
-	id,
-	title,
-	ingredients,
-	instructions,
-}: RecipeWithIngredientsAndInstructions) {
+	recipe: { id, title, ingredients, instructions },
+	isFeatureView = false,
+}: RecipeProps) {
 	return (
 		<>
-			<Box typography="h3">
-				{title} <Link href={`${id}/edit`}>Edit</Link>
+			<Box>
+				<Typography variant="h3">{title}</Typography>
+				{isFeatureView ? (
+					<Link href={`${id}`}>View</Link>
+				) : (
+					<Link href={`${id}/edit`}>Edit</Link>
+				)}
 			</Box>
 			<Box>
-				<Box typography="h4">Ingredients</Box>
+				<Typography variant="h4">Ingredients</Typography>
 
 				<List>
 					{ingredients?.map(({ description, id }) => (
@@ -25,7 +33,7 @@ export function Recipe({
 				</List>
 			</Box>
 			<Box>
-				<Box typography="h4">Instructions</Box>
+				<Typography variant="h4">Instructions</Typography>
 				<List>
 					{instructions?.map(({ description, id, order }, idx) => (
 						<ListItem key={id}>

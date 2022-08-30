@@ -1,9 +1,8 @@
 import { Params } from 'next/dist/server/router'
-import Link from 'next/link'
 
 import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
-import { Box, Container, List, ListItem } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { Header } from '@/components/Header'
 import { Recipe } from '@/components/Recipe'
@@ -17,7 +16,7 @@ export default function RecipePage(
 		<>
 			<Header />
 			<Container id={`recipe-${recipe.id}`} sx={{ marginTop: 4 }}>
-				<Recipe {...recipe} />
+				<Recipe recipe={recipe} />
 			</Container>
 		</>
 	)

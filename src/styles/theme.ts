@@ -1,14 +1,6 @@
 import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
-	// This doesn't work
-	// components: {
-	// 	MuiLink: {
-	// 		defaultProps: {
-	// 			underline: 'none',
-	// 		},
-	// 	},
-	// },
 	palette: {
 		primary: {
 			contrastText: 'white',
