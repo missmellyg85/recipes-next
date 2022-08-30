@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import { generateTestRecipe } from 'src/test/utils'
 
-import EditRecipePage from '@/pages/recipe/[id]/edit'
+import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
-describe('Edit Recipe Page', () => {
-	it('renders', () => {
+import { Recipe } from '.'
+
+describe('Recipe Page', () => {
+	it('renders the recipe', () => {
 		const testRecipe = generateTestRecipe()
-		render(<EditRecipePage {...testRecipe} />)
+		render(<Recipe {...testRecipe} />)
 
 		expect(
 			screen.getByText(testRecipe.title, { exact: false })

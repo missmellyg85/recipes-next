@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { Box, Button, Container, TextField } from '@mui/material'
 
-import Header from '@/components/Header'
+import { Header } from '@/components/Header'
 
 export default function AddRecipe() {
 	const [title, setTitle] = useState<string>('')

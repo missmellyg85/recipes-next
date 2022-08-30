@@ -1,23 +1,13 @@
 import { render, screen } from '@testing-library/react'
-
-import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
+import { generateTestRecipe } from 'src/test/utils'
 
 import RecipePage from '../../../pages/recipe/[id]'
 
 describe('Recipe Page', () => {
-	it('renders the recipe', () => {
-		const testRecipe: RecipeWithIngredientsAndInstructions = {
-			createdAt: new Date(),
-			id: 1234,
-			ingredients: [],
-			instructions: [],
-			title: 'Some Test',
-			updatedAt: new Date(),
-		}
+	it('renders', () => {
+		const testRecipe = generateTestRecipe()
 		render(<RecipePage {...testRecipe} />)
 
-		expect(
-			screen.getByText(testRecipe.title, { exact: false })
-		).toBeInTheDocument()
+		expect(screen.getByRole('banner')).toBeInTheDocument()
 	})
 })

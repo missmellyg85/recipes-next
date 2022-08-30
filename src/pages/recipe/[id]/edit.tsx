@@ -4,7 +4,7 @@ import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
 import { Box, Container } from '@mui/material'
 
-import Header from '@/components/Header'
+import { Header } from '@/components/Header'
 
 import prisma from '@/lib/db/prisma'
 
