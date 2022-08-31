@@ -1,20 +1,23 @@
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { Prisma } from '@prisma/client'
 
-import { List, ListItem } from '@mui/material'
+import { List, ListItem, ListItemButton } from '@mui/material'
 
 type RecipeListProps = {
 	recipes?: Prisma.RecipeGetPayload<Prisma.RecipeArgs>[]
 }
 
 export function RecipeList({ recipes }: RecipeListProps) {
+	const router = useRouter()
 	if (recipes?.length) {
 		return (
 			<List>
 				{recipes?.map(({ id, title }) => (
-					<ListItem key={`recipe-${id}`}>
-						<Link href={`/recipe/${id}`}>{title}</Link>
+					<ListItem disablePadding key={`recipe-${id}`}>
+						<ListItemButton onClick={() => router.push(`/recipe/${id}`)}>
+							{title}
+						</ListItemButton>
 					</ListItem>
 				))}
 			</List>

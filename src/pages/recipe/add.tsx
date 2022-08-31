@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Box, Button, Container, TextField } from '@mui/material'
 
 import { Header } from '@/components/Header'
+import { Layout } from '@/components/Layout/Layout'
 
 export default function AddRecipe() {
 	const [title, setTitle] = useState<string>('')
@@ -68,8 +69,7 @@ export default function AddRecipe() {
 	}
 
 	return (
-		<>
-			<Header />
+		<Layout>
 			<Container data-testid="add-recipe-container" sx={{ paddingTop: 4 }}>
 				{message}
 				<Box component="form">
@@ -139,6 +139,6 @@ export default function AddRecipe() {
 					</Box>
 				</Box>
 			</Container>
-		</>
+		</Layout>
 	)
 }

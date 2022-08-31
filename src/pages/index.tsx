@@ -8,6 +8,7 @@ import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 
 import { Box, Grid, Typography } from '@mui/material'
 
+import { Layout } from '@/components/Layout/Layout'
 import { Recipe } from '@/components/Recipe'
 import { RecipeList } from '@/components/RecipeList'
 
@@ -20,24 +21,26 @@ type HomePageProps = {
 
 export default function HomePage({ recipes, featuredRecipe }: HomePageProps) {
 	return (
-		<Grid container sx={{ paddingTop: 4 }}>
-			<Grid item xs={12}>
-				<Typography variant="h1">Home</Typography>
+		<Layout>
+			<Grid container item sx={{ paddingTop: 4 }} xs={12}>
+				<Grid item xs={12}>
+					<Typography variant="h1">Home</Typography>
+				</Grid>
+				<Grid item xs={6}>
+					<Typography variant="h2">Recipes Index</Typography>
+					<Box>
+						<Link href="/recipe/add">Add New</Link>
+					</Box>
+					<RecipeList recipes={recipes} />
+				</Grid>
+				<Grid item xs={6}>
+					<Typography variant="h2">Featured Recipe</Typography>
+					{featuredRecipe && (
+						<Recipe isFeatureView={true} recipe={featuredRecipe} />
+					)}
+				</Grid>
 			</Grid>
-			<Grid item xs={6}>
-				<Typography variant="h2">Recipes Index</Typography>
-				<RecipeList recipes={recipes} />
-				<Box>
-					<Link href="/recipe/add">Add New</Link>
-				</Box>
-			</Grid>
-			<Grid item xs={6}>
-				<Typography variant="h2">Featured Recipe</Typography>
-				{featuredRecipe && (
-					<Recipe isFeatureView={true} recipe={featuredRecipe} />
-				)}
-			</Grid>
-		</Grid>
+		</Layout>
 	)
 }
 

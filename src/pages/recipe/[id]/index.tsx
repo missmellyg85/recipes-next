@@ -5,6 +5,7 @@ import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 import { Container } from '@mui/material'
 
 import { Header } from '@/components/Header'
+import { Layout } from '@/components/Layout/Layout'
 import { Recipe } from '@/components/Recipe'
 
 import prisma from '@/lib/db/prisma'
@@ -13,12 +14,11 @@ export default function RecipePage(
 	recipe: RecipeWithIngredientsAndInstructions
 ) {
 	return (
-		<>
-			<Header />
+		<Layout>
 			<Container id={`recipe-${recipe.id}`} sx={{ marginTop: 4 }}>
 				<Recipe recipe={recipe} />
 			</Container>
-		</>
+		</Layout>
 	)
 }
 

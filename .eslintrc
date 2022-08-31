@@ -1,11 +1,18 @@
 {
 	"root": true,
-	"plugins": ["simple-import-sort", "import", "sort-keys-fix"],
+	"plugins": [
+		"@typescript-eslint",
+		"simple-import-sort",
+		"import",
+		"sort-keys-fix"
+	],
 	"extends": [
 		"eslint:recommended",
 		"next",
 		"next/core-web-vitals",
+		"plugin:@typescript-eslint/recommended",
 		"plugin:import/recommended",
+		"plugin:import/typescript",
 		"prettier"
 	],
 	"env": {
@@ -15,11 +22,16 @@
 		"node": true
 	},
 	"rules": {
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{ "ignoreRestSiblings": true }
+		],
+		"@typescript-eslint/no-explicit-any": "error",
+		"@typescript-eslint/ban-ts-comment": "off",
 		"import/first": "error",
 		"import/no-duplicates": "error",
 		"import/newline-after-import": "error",
 		"no-console": ["error", { "allow": ["error", "warn"] }],
-		"react/prop-types": "error",
 		"react/jsx-sort-props": [
 			"error",
 			{

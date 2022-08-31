@@ -5,6 +5,7 @@ import { RecipeWithIngredientsAndInstructions } from '@/ts/types'
 import { Box, Container } from '@mui/material'
 
 import { Header } from '@/components/Header'
+import { Layout } from '@/components/Layout/Layout'
 
 import prisma from '@/lib/db/prisma'
 
@@ -15,12 +16,11 @@ export default function EditRecipePage({
 // instructions,
 RecipeWithIngredientsAndInstructions) {
 	return (
-		<>
-			<Header />
+		<Layout>
 			<Container id={`recipe-${id}`} sx={{ marginTop: 4 }}>
 				<Box typography="h3">Edit {title}</Box>
 			</Container>
-		</>
+		</Layout>
 	)
 }
 
